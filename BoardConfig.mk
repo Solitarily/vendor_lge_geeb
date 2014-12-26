@@ -157,4 +157,4 @@ EXTENDED_FONT_FOOTPRINT := true
 
 MALLOC_IMPL := dlmalloc
 
--include vendor/lge/gee/BoardConfigVendor.mk
+-include vendor/lge/geeb/BoardConfigVendor.mk
