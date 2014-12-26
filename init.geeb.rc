@@ -185,6 +185,7 @@ on post-fs-data
     mkdir /data/system/sensors
     chmod 665 /data/system/sensors
     write /data/system/sensors/settings 1
+    restorecon /data/system/sensors/settings
     chmod 660 /data/system/sensors/settings
 
     # AKM setting data
@@ -248,7 +249,7 @@ on post-fs-data
     mkdir /dev/socket/mpdecision 2770 root system
 
     # adjust vibrator amplitude
-    write /sys/class/timed_output/vibrator/amp 70
+    write /sys/class/timed_output/vibrator/amp 60
 
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/rpm_resources/enable_low_power/L2_cache 1
@@ -469,6 +470,11 @@ service qseecomd /system/bin/qseecomd
 service diag_mdlog /system/bin/diag_mdlog -s 100
     class late_start
     disabled
+
+service qrngd /system/bin/qrngd -f
+    class main
+    user root
+    group root
 
 # on property:gsm.sim.state=READY
 #    start diag_mdlog

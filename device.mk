@@ -29,6 +29,7 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_PACKAGES := \
+	lights.geeb \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
@@ -36,10 +37,14 @@ PRODUCT_PACKAGES := \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
-	lights.geeb 
-
-PRODUCT_PACKAGES += \
     charger_res_images
+
+# Live Wallpapers
+PRODUCT_PACKAGES += \
+        LiveWallpapers \
+        LiveWallpapersPicker \
+        VisualizationWallpapers \
+        librs_jni
 
 PRODUCT_COPY_FILES += \
 	device/lge/geeb/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
@@ -65,6 +70,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
 	device/lge/geeb/media_codecs.xml:system/etc/media_codecs.xml
 
 # Prebuilt kl and kcm keymaps
@@ -141,6 +147,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.audio.fluence.mode=endfire \
 	persist.audio.lowlatency.rec=false
 
+
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.radio.apm_sim_not_pwdn=1
@@ -151,6 +158,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #Upto 3 layers can go through overlays
 PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
+
+PRODUCT_CHARACTERISTICS := nosdcard
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -237,8 +246,9 @@ PRODUCT_PACKAGES += \
 	keystore.msm8960
 
 PRODUCT_PACKAGES += \
-	wpa_supplicant_overlay.conf \
-	p2p_supplicant_overlay.conf
+        hostapd_default.conf \
+        wpa_supplicant_overlay.conf \
+        p2p_supplicant_overlay.conf
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	rild.libpath=/system/lib/libril-qc-qmi-1.so
@@ -271,5 +281,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
 
+# Hardware codecs
+PRODUCT_PROPERTY_OVERRIDES += \
+    qcom.hw.aac.encoder=true
+
+PRODUCT_PACKAGES += \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc
+
+# QRNGD
+PRODUCT_PACKAGES += qrngd
+
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+
+# This is the geeb-specific audio package
+# $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackage10.mk)
+
 $(call inherit-product, hardware/qcom/msm8960/msm8960.mk)

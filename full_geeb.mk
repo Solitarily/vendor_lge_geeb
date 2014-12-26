@@ -24,19 +24,6 @@ PRODUCT_PACKAGES += \
         VisualizationWallpapers
 
 
-# Get the long list of APNs and Spn
-PRODUCT_COPY_FILES := \
-    device/lge/geeb/apns-full-conf.xml:system/etc/apns-conf.xml \
-    device/lge/geeb/spn-conf.xml:system/etc/spn-conf.xml
-
-# add bootanimation.zip
-PRODUCT_COPY_FILES += \
-    device/lge/geeb/bootanimation.zip:system/media/bootanimation.zip
-
-# init.d support
-PRODUCT_COPY_FILES += \
-    device/lge/geeb/sysinit:system/bin/sysinit
-
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
@@ -49,4 +36,4 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/lge/geeb/device.mk)
-$(call inherit-product-if-exists, vendor/lge/gee/gee-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/geeb/device-vendor.mk)

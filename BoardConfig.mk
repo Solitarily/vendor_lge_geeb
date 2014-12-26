@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
@@ -30,6 +28,7 @@ TARGET_KRAIT_BIONIC_PLDOFFS := 10
 TARGET_KRAIT_BIONIC_PLDTHRESH := 10
 TARGET_KRAIT_BIONIC_BBTHRESH := 64
 TARGET_KRAIT_BIONIC_PLDSIZE := 64
+TARGET_MPDECISION_BOOST_SOCKET := /dev/socket/mpdecision/touchboost
 
 TARGET_NO_BOOTLOADER := true
 
@@ -41,6 +40,8 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01600000
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/lge/msm
 TARGET_KERNEL_CONFIG := geeb_defconfig
+
+TARGET_OTA_ASSERT_DEVICE := geeb,e970,e971,e973
 
 BOARD_USES_ALSA_AUDIO:= true
 BOARD_USES_LEGACY_ALSA_AUDIO:= false
@@ -58,6 +59,9 @@ TARGET_BOOTLOADER_NAME=geeb
 TARGET_BOARD_INFO_FILE := device/lge/geeb/board-info.txt
 
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/geeb/bluetooth
+
+# Use the QCOM PowerHAL
+TARGET_USES_QCOM_POWERHAL := true
 
 # FIXME: HOSTAPD-derived wifi driver
 BOARD_HAS_QCOM_WLAN := true
@@ -91,6 +95,7 @@ endif
 WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
 
 TARGET_RECOVERY_FSTAB = device/lge/geeb/fstab.geeb
+RECOVERY_FSTAB_VERSION = 2
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672 # 22M
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672 # 22M
@@ -109,6 +114,7 @@ BOARD_HAL_STATIC_LIBRARIES := libdumpstate.geeb
 
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 TARGET_NO_RPC := true
+TARGET_PROVIDES_GPS_LOC_API := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/geeb
 
@@ -157,4 +163,8 @@ EXTENDED_FONT_FOOTPRINT := true
 
 MALLOC_IMPL := dlmalloc
 
--include vendor/lge/gee/BoardConfigVendor.mk
+-include vendor/lge/geeb/BoardConfigVendor.mk
+
+BOARD_HAS_NO_SELECT_BUTTON := true
+
+BOARD_HARDWARE_CLASS := device/lge/geeb/cmhw/

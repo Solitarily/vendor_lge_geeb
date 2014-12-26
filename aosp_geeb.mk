@@ -16,17 +16,3 @@
 $(call inherit-product, device/lge/geeb/full_geeb.mk)
 
 PRODUCT_NAME := aosp_geeb
-
-PRODUCT_PACKAGES += \
-    Launcher3 \
-
-# Telephony packages
-PRODUCT_PACKAGES += \
-    Mms \
-    Stk \
-    CellBroadcastReceiver \
-    WhisperPush
-
-# Mms depends on SoundRecorder for recorded audio messages
-PRODUCT_PACKAGES += \
-    SoundRecorder
