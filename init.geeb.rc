@@ -47,6 +47,9 @@ on init
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
+    mkdir /sns 0775 system system
+    mkdir /sns/cal 0771 system system
+
     # Setup custom emergency number list based on
     # the MCC. This is needed by RIL.
     setprop persist.radio.custom_ecc "1"
@@ -431,18 +434,13 @@ service thermald /system/bin/thermald
     class main
     group radio system
 
-service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
-    class main
-    user root
-    group root system
-
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input
 
 service wcnss_init /system/bin/sh /system/etc/init.geeb.wifi.sh
-    class late_start
+    class main
     user system
     group system wifi
     seclabel u:r:conn_init:s0
@@ -475,6 +473,10 @@ service qrngd /system/bin/qrngd -f
     class main
     user root
     group root
+    
+service fetch-swv /system/bin/fetch-swv
+    class late_start
+    oneshot
 
 # on property:gsm.sim.state=READY
 #    start diag_mdlog
