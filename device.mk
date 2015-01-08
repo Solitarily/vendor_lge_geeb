@@ -90,7 +90,8 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
-	device/lge/geeb/touch_dev.idc:system/usr/idc/touch_dev.idc
+	device/lge/geeb/touch_dev.idc:system/usr/idc/touch_dev.idc \
+	device/lge/geeb/touch_dev.kl:system/usr/keylayout/touch_dev.kl
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
