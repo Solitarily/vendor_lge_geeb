@@ -28,7 +28,7 @@ DEVICE_PACKAGE_OVERLAYS := device/lge/geeb/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
@@ -40,6 +40,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     charger_res_images
+
+# Script for baseband name resolution
+PRODUCT_COPY_FILES += \
+	device/lge/geeb/fetch-swv:system/bin/fetch-swv
 
 PRODUCT_COPY_FILES += \
 	device/lge/geeb/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
@@ -80,7 +84,8 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
-	device/lge/geeb/touch_dev.idc:system/usr/idc/touch_dev.idc
+	device/lge/geeb/touch_dev.idc:system/usr/idc/touch_dev.idc \
+	device/lge/geeb/touch_dev.kl:system/usr/keylayout/touch_dev.kl
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -102,6 +107,10 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 	frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
+
+# GPS configuration
+PRODUCT_COPY_FILES += \
+	device/lge/geeb/gps.conf:system/etc/gps.conf
 
 # NFC packages
 PRODUCT_PACKAGES += \
