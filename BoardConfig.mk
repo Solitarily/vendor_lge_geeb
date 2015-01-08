@@ -141,6 +141,7 @@ BOARD_SEPOLICY_UNION += \
        hostapd.te \
        kickstart.te \
        kcal_dev.te \
+       keystore.te \
        mediaserver.te \
        mpdecision.te \
        netmgrd.te \

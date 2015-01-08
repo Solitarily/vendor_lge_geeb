@@ -28,8 +28,8 @@ DEVICE_PACKAGE_OVERLAYS := device/lge/geeb/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-PRODUCT_PACKAGES := \
-	lights.geeb \
+PRODUCT_PACKAGES += \
+    lights.geeb \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
@@ -113,6 +113,10 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 	frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
+
+# GPS configuration
+PRODUCT_COPY_FILES += \
+	device/lge/geeb/gps.conf:system/etc/gps.conf
 
 # NFC packages
 PRODUCT_PACKAGES += \
